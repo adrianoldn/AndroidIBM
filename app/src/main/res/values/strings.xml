@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TesteIBM</string>
+    <string name="share_subject">subject</string>
+    <string name="share_using">share using</string>
+</resources>

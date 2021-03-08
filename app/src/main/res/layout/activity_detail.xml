@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="event"
+            type="com.example.androidibm.model.Event" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/title_event_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@{event.title}"
+                        android:textSize="16dp"
+                        android:textStyle="bold|italic" />
+
+                    <ImageView
+                        android:id="@+id/image_event_detail"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="8dp" />
+
+                    <TextView
+                        android:id="@+id/description_event_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{event.description}"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <ProgressBar
+                android:id="@+id/progress_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
