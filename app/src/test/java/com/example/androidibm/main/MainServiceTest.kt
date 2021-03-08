@@ -34,11 +34,6 @@ class MainServiceTest {
     @Mock
     lateinit var mainRepository: MainRepository
 
-    @Captor
-    lateinit var calbackCaptor: ArgumentCaptor<(events: List<Event>) -> Unit>
-
-    @Captor
-    lateinit var calbackCErroaptor: ArgumentCaptor<(msg: String) -> Unit>
 
 
     @Before
@@ -58,50 +53,15 @@ class MainServiceTest {
     private fun <T> uninitialized(): T = null as T
 
     @Test
-    fun getEventsSucess() {
-        val event =
-            Event(listOf(), 2323, "Event", 32.03232, -3232.3232, "wwew", 32.44, "3232", "221")
-        val lista = mutableListOf<Event>()
-        lista.add(event)
-        MokitoRepository(Observable.just(lista)).fetchEvents({
-            mainView.setEventList(it)
-        },{
-            mainView.showLabelAnswer(View.VISIBLE)
-        })
-
-        var app = mock(AppRetrofit::class.java)
-        val mainRepository = mock(MokitoRepository::class.java)
-        mainRepository.lista = Observable.just(lista)
-
-
-
-
-        `when`(mainRepository.fetchEvents({anyObject()},{anyObject()})).thenAnswer {
-              (it.arguments[0] as ( list:  List<Event>) -> Unit).invoke(lista)
-              (it.arguments[1] as (msg:  String) -> Unit).invoke("")
-
-        }
+    fun getEvents() {
         mainPresenter.getEvents()
-//        Mockito.verify(mainView).showLabelAnswer(View.GONE)
-//        Mockito.verify(mainView).showLoadDialog(View.VISIBLE)
-        verify(mainRepository).fetchEvents({
-            print(it)
-        },{
-            print(it)
-        })
+        Mockito.verify(mainView).showLabelAnswer(View.GONE)
+        Mockito.verify(mainView).showLoadDialog(View.VISIBLE)
 
 
     }
 
-    class MokitoRepository (var lista: Observable<List<Event>>) {
-        fun fetchEvents(callback: (events: List<Event>) -> Unit, callbackErro: (msg: String) -> Unit){
-            lista.subscribe({
-                callback.invoke(it)
-            },{
-                callbackErro("")
-            })
-        }
-    }
+
 
 
 
